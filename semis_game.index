@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=9yUH5EBnk1Y5pKpGzVC4GlfwLox0xkzOB0HBeMFhG7Ulr_9z8441vNUM1FNSYyC1s4RgNuEuJSMlZ-FItqiOIomch9ESjVsYY60GtcqbnYV73f1BjuDHeBLK3xxHrOaxRn6Wsdi_Q8LD-QVha9HDQuNq4zRkpBCn3tVQCesu9Q3xtToOVsQzUAQA0HSSXJ5TiGYh8XAPdQ7H7w0XzdTxpTstKfWWWeHnvIDi6Oq14fwRjWZWKe_xYPiT3UH8FKbhSz5j6cpgrEP1ELcY1_xvj5LDieyTHsJxP7PmbkzikjDGdfjgCv2N86nU0I2TDizpF6hm2cArDXdA7Tadc1D-cfY3XLqt0TqEl9vuCvAydnJRfnLIA4JAWiE9IRFYFgJ4lIzO4vPKzE9k3Cnzhy5VPULQX480x4KfJTluGacd3k0MjX0DVZDLXClvQunWjO1pSc2yRAXgQdyyndkl33_j5pAUUN_fWSYtBAT0LuHnfSBAHuoRRZPG4GOjyUaK9RoQ" charset="UTF-8"></script><style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #inputBox {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>Guess the number between 1 and 100:</p>
+    <input type="number" id="guessInput" min="1" max="100">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <button onclick="restartGame()">Restart Game</button>
+    <div id="result"></div>
+
+    <script>
+        let secretNumber;
+        let guessAttempts = 0;
+
+        function startGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            guessAttempts = 0;
+            document.getElementById("result").innerText = "";
+        }
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById("guessInput").value);
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                alert("Please enter a valid number between 1 and 100.");
+                return;
+            }
+
+            guessAttempts++;
+
+            if (userGuess === secretNumber) {
+                document.getElementById("result").innerText = "Congratulations! You guessed the number in ${guessAttempts} attempts.";
+            } else if (userGuess < secretNumber) {
+                document.getElementById("result").innerText = "Try a higher number.";
+            } else {
+                document.getElementById("result").innerText = "Try a lower number.";
+            }
+        }
+
+        function restartGame() {
+            document.getElementById("guessInput").value = "";
+            startGame();
+        }
+
+        // Initial game start
+        startGame();
+    </script>
+</body>
+</html>
